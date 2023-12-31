@@ -4,12 +4,14 @@
 
 In our internship project, we investigate the significant benefits that edge computing introduces in the AR integrated autonomous vehicle computation offloading. We have developed an object detection model and an eye tracking model to form the basis of our computations that need to be performed locally and with the assistance of an edge server. We measure and record various computation resource utilization such as CPU, bandwidth, energy consumption, and latency from executing these various computations locally and with the help of edge computing.
 
+Our updated project can be obtain from the link: [EdgeXR OneDrive](https://uofh-my.sharepoint.com/:f:/r/personal/dmdoe_cougarnet_uh_edu/Documents/EdgeXR%20Update?csf=1&web=1&e=H0hohM)
+
 ## Project Components
 
 1. **Server Side**: Consists of our object detection model.
 2. **Client Side**: Consists of our HoloLens 2 device.
 
-## Server-Side Object Detection
+## Server-Side Object Detection (MacBook Setup)
 
 We run the YOLOv8 model on the server side, which receives camera frames from the HoloLens to perform object detection. The detected object information is then transmitted to the HoloLens for rendering.
 
@@ -27,17 +29,14 @@ To configure the HoloLens device portal for streaming:
 
 1. Connect your HoloLens to Wi-Fi.
 2. Obtain your device's IP address through the device's network settings.
-
 ![HoloLens Device Portal 1](docs/deviceportal_usbncm_ipaddress.jpg)
 
 3. Open a web browser on your PC and go to `https://<YOUR_HOLOLENS_IP_ADDRESS>`.
-
 ![HoloLens Device Portal 2](docs/using-windows-portal-img-04.png)
 
 4. Ignore any security certificate warnings.
 5. Create or enter a username and password.
 6. Navigate to `View -> Mixed Reality Capture -> Live preview`.
-
 ![HoloLens Device Portal 1](docs/using-windows-portal-img-07.png)
 
 7. Right-click to copy the live stream link and replace the stream link in the `server.py` code.
@@ -50,7 +49,7 @@ After configuring the HoloLens device portal and updating the stream link in `se
 python server.py
 ``````
 
-# AR Integrated Autonomous Vehicle Computation Offloading - Client Side
+# AR Integrated Autonomous Vehicle Computation Offloading - Client Side (Windows Setup)
 
 In this section, we'll guide you through setting up and using the client side of our AR Integrated Autonomous Vehicle Computation Offloading project. The client side is developed in Unity and is designed to receive object detection data from the server.
 
@@ -74,30 +73,49 @@ To set up the client side of the project, follow these steps:
    - We have provided the necessary Unity project files, including scripts and assets, on OneDrive for your convenience.
    - Download the complete project from the OneDrive link provided by the team.
 
-2. **Copy Files and Folders:**
+2. **Copy Files and Folders (Skip step if you downloaded project from OneDrive):**
    - Copy the `BoxCreatorWebSocket.cs` file into the `Assets/Scripts` folder of your Unity project.
    - Replace the `BoundingBoxes` scene in the `Assets/Scenes` folder with the provided scene.
    - Replace the `Prefabs` folder in the `Assets/Prefabs` directory with the provided Prefabs folder.
    - Similarly, copy the `Plugins` folder into the `Assets/Prefabs` folder or follow the provided instructions for downloading the entire project.
 
-3. **Build the Solution:**
-   - In Unity, select `File -> Build Settings -> Build` to build a solution for the project to deploy on the HoloLens.
+3. **Editing the project:**
+   - In Unity Hub, Open add new project from disk and navigate to select the extracted project (EdgeXR).
+   - Download the required unity version to open the code if you have to and if the code opens, select scene from the `Assets -> Scene -> EgdeXR` in the Project menu. 
+   - With the EdgeXR scene selected, locate the Scriptsv folder in Project menu `Assets -> Scripts` and find the script `BoxCreatorWebSocket.cs`, open this script and change the `ServerIP` and `ServerPort` with the MacBook Server IP respectively.
+   - In the Hierarchy menu, locate MixedRealitySceneContent, dropdown and select the GameObject to check if the script `BoxCreatorWebSocket.cs` is added and network configuration is correct as well.
+![Unity Project](docs/unity_edits.png)
 
-4. **Visual Studio Configuration:**
+4. **Build the Solution:**
+   - You want to run the application using unity first to make sure it works before building.
+   - Setup the server and after editing the server IP and Port, hit the play to simulate the demo in unity first before building a solution. you should obtain this: 
+   ![Unity Project](docs/unity_test.gif)
+   - In Unity, select `File -> Build Settings -> Build` to build a solution for the project to deploy on the HoloLens.
+   ![Unity Project](docs/build.png)
+   - Build project into the Build folder shown in the folders here:
+   ![Unity Project](docs/build_folder.png)
+   - NB: Ensure you have only the EdgeXR scene added in your Scenes In Build, if there are other scenes, remove all of them `Ctrl+A` then `Backspace(delete)` and then select the Add Open Scences button.
+
+5. **Visual Studio Configuration:**
    - Navigate to the `Build` folder and open the solution file in Visual Studio.
-   - Configure Visual Studio for either `DEBUG` or `RELEASE` and set the architecture to `ARM`.
+   ![Unity Project](docs/sln.png)
+   - Configure Visual Studio for either `DEBUG` or `RELEASE` and set the architecture to `ARM` and select device not Remote Machine.
+   ![Unity Project](docs/vs.png)
    - Build and run the application on your HoloLens device.
+   - NB: Hololens should be connected to the PC and Debug will log the eye tracking and server data but release will not. To configure the Remote Machine, Select the EdgeXR Debug properties and find the Debugging option. Add the Hololens IP address in the `Machine Name` section.
+   ![Unity Project](docs/remote.png)
 
 ## Usage
 
 Once you have successfully deployed the application on your HoloLens device, follow these steps:
 
 1. **Start the Server:**
-   - Run the server to initiate object detection. Ensure that the server is up and running.
+   - Run the server on the MacBook to initiate object detection. Ensure that the server is up and running.
 
 2. **Run the HoloLens Application:**
    - Hit the play button in Visual Studio to deploy the application on your HoloLens.
-   - Once deployed, you can exit the application on the HoloLens.
+   - Once deployed, you can test the object detection and eye tracking project
+   - Exit the application on the HoloLens when you finish testing.
 
 3. **Client Operation:**
    - Enjoy the demo as the HoloLens receives and displays object detection data from the server.
