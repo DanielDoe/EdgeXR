@@ -15,13 +15,13 @@ Our updated project can be obtain from the link: [EdgeXR OneDrive](https://uofh-
 
 We run the YOLOv8 model on the server side, which receives camera frames from the HoloLens to perform object detection. The detected object information is then transmitted to the HoloLens for rendering.
 
-## Server Code (server.py)
+## Server Code (server_update.py)
 
-- [server.py](server/server.py): This code is responsible for running the object detection model on the server side.
+- [server_update.py](Object Detection Server Side/server_update.py): This code is responsible for running the object detection model on the server side.
 
 ## Preliminaries
 
-Before running the server code, make sure to install the necessary Python packages, especially YOLOv8, Detect, Segment, and Pose models. These models are pretrained on the COCO dataset and can be obtained from [ultralytics/ultralytics](https://github.com/ultralytics/ultralytics).
+Before running the server code, make sure to install the necessary Python packages (especially pip install uuid), especially YOLOv8, Detect, Segment, and Pose models. These models are pretrained on the COCO dataset and can be obtained from [ultralytics/ultralytics](https://github.com/ultralytics/ultralytics).
 
 ## Configuring the HoloLens Device Portal
 
