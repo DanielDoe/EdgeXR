@@ -18,6 +18,7 @@ We run the YOLOv8 model on the server side, which receives camera frames from th
 ## Server Code (server_update.py)
 
 - [server_update.py](Object Detection Server Side/server_update.py): This code is responsible for running the object detection model on the server side.
+- NB: Please configure the server IP and Host based on the Macbook's IP and you can keep the host as 8000 (This will be used in our client side for connection and data transfer).
 
 ## Preliminaries
 
